@@ -1,0 +1,3 @@
+app_name: python_app
+environment: production
+version: 1.0.0
