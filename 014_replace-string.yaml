@@ -1,0 +1,13 @@
+---
+- name: replacing string
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: replacing a string
+     replace:
+      path: /root/dir4/f1.txt
+      regexp: "hy" # study
+      replace: "hello"
+
+#replace module
