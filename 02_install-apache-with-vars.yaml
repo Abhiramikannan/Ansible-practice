@@ -1,0 +1,17 @@
+---
+- name: install apche on servers
+  hosts: webserver
+  remote_user: root
+  become: yes
+  vars: 
+   pak_name: apache2 
+  tasks:
+   - name: update
+     apt:
+      update_cache: yes
+   - name: install apche
+     apt:
+      name: "{{pak_name}}"
+      state: present
+
+  # vars is used to mention a variable and passing
