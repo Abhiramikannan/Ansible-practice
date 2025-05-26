@@ -1,0 +1,13 @@
+---
+- name: creating a directory in the webserver
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: creating a directory
+     file:
+      path: /root/ansible
+      state: directory
+      mode: 775
+
+  # creates a folder ansible inside /root in master and worker nodes
