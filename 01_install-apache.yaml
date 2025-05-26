@@ -1,0 +1,16 @@
+---
+- name: installation of webserver
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: updating
+     apt:
+      update_cache: yes
+   - name: install apache
+     apt:
+       name: apache2
+       state: present
+
+
+#ansible-playbook -i inventory 01_install-apache.yaml 
