@@ -1,0 +1,16 @@
+---
+- name: uninstall apache in webservers
+  hosts: webserver
+  remote_user: root
+  become: yes
+  vars:
+   pak_name: apache2
+  tasks:
+   - name: update
+     apt:
+      update_cache: yes
+   - name: uninstall apache
+     apt:
+      name: "{{pak_name}}"
+      state: absent
+      purge: yes
