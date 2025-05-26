@@ -1,0 +1,24 @@
+---
+- name: automating webservr deployment and configuration using ansible  roles
+  hosts: webserver
+  remote_user: root
+  become: yes  
+  pre_tasks:
+    - name: install curl
+      apt:
+       name: curl
+       state: present
+       update_cache: yes
+  vars_files:
+    - group_vars/all/vault.yml
+  roles:
+    - webserver
+
+#create this file where u created role
+
+  # create group_vars/all/vault.yml -this folder nd file
+  # add env: staging  dont use = or ""
+  # ansible-vault encrypt group_vars/all/vault.yml
+  # encrypted
+  #ansible-playbook  -i /root/inventory site.yaml --ask-vault-pass
+  # curl http://localhost
