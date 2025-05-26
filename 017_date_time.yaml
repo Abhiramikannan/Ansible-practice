@@ -1,0 +1,13 @@
+---
+- name: get the date
+  hosts: all
+  remote_user: root
+  become: yes
+  tasks:
+   - name: fetch the date
+     command: date
+     register: date
+     debug:
+       msg: "{{date.stdout}}"
+
+    
