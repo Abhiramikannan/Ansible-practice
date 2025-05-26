@@ -1,0 +1,39 @@
+#sudo apt install python3-mysqldb on all remote hosts
+#ansible-galaxy collection install community.mysql - on master
+
+
+---
+- name: install mysql server
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: update
+     apt:
+      update_cache: yes
+   - name: install mysql server
+     apt:
+      name: mysql-server
+      state: present
+   - name: start the service
+     service:
+      name: mysql
+      state: started
+      enabled: yes
+   - name: create databse to mysql
+     community.mysql.mysql_db:
+       name: abhi_database
+       state: present
+       login_user: root
+       login_password: root
+   - name: craeting user
+     community.mysql.mysql_user:   #or mysql_user
+       name: abhi_user
+       password: abhi
+       priv: "abhi_database.*:ALL"
+       state: present
+       login_user: root
+       login_password: root
+#ansible-doc mysql
+#mysql -u abhi -p 
+#show databases; =the database should shown inside
