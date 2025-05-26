@@ -1,0 +1,17 @@
+---
+- name: creating user
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: creating user
+     user:
+      name: abhi
+      shell: /bin/bash
+      state: present 
+      create_home: yes #create a user abhi with bash shell and home directory
+      groups: root #add the user to group root
+
+  # id abhi -to check user exist/not
+
+  # ansible-doc modulename(terminal access)
