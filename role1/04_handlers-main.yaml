@@ -1,0 +1,10 @@
+# handlers file for webserver
+- name: restart apache
+  service:
+   name: apache2
+   state: restarted
+   enabled: yes
+
+# in tasks we perform copy so notified to restart
+#restart command is written in handlers
+# any deployment= restart required through handlers
