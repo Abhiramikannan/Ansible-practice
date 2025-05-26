@@ -1,0 +1,7 @@
+---
+- name: install python and copy the  config.yaml.j2 inside templates  to /etc/pyth_app/config.yaml
+  hosts: webserver
+  remote_user: root
+  become: yes 
+  roles:
+    - webserver
