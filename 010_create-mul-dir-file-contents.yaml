@@ -1,0 +1,25 @@
+---
+- name: creating multiple dir
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: create-multi-dir
+     file:
+      path: "{{item}}"
+      state: directory
+      mode: "0775"
+     loop:
+       - /root/dir4   #(check indendation)
+       - /root/dir5
+       - /root/dir6
+   - name: creating file and addig contents
+     copy:
+      dest: "{{item}}"
+      content: "hy"
+     loop:
+       - /root/dir4/f1.txt
+       - /root/dir5/f2.txt
+       - /root/dir6/f3.txt
+
+#item
