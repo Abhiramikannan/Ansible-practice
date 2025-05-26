@@ -1,0 +1,33 @@
+---
+- name: installing apache2 if ubuntu and httpd if redhat and validate and copy  local website content to remote  and set permsiion
+  hosts: webserver
+  remote_user: root
+  become: yes
+  vars:
+   pack_name: "{{'apache2' if ansible_os_family=='Debian' else 'httpd'}}"
+  tasks:
+   - name: updating
+     apt:
+      update_cache: yes
+     when: ansible_os_family=='Debian'
+   - name: updating
+     yum:
+      update_cache: yes
+     when: ansible_os_family=='RedHat'
+   - name: installing
+     apt:
+      name: "{{pack_name}}"
+      state: latest
+   - name: copy the index.html to webroot
+     copy:
+      src: index.html
+      dest: /var/www/html/index.html
+      owner: www-data
+      group: www-data
+      mode: "0644"
+     notify: Restart Apache
+  handlers: 
+   - name: Restart Apache
+     service:
+      state: restarted
+      enabled: yes
