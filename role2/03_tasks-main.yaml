@@ -1,0 +1,21 @@
+- name: install python
+  apt:
+   update_cache: yes
+- name:
+  apt:
+   name: python3
+   state: present
+- name: create directory
+  file:
+    path: /etc/webserver
+    state: directory
+    mode: 0755
+- name:  copy the config.yaml.j2  in /templates/
+  template:
+    src: config.yaml.j2
+    dest: /etc/webserver/config.yaml.j2
+    mode: "0644"
+
+  # created directory because no directory there
+  # template only copy the file wont create
+  
