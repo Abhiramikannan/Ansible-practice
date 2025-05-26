@@ -1,0 +1,23 @@
+- name: update
+  apt:
+   update_cache: yes
+- name: install apache
+  apt:
+   name: apache2
+   state: present
+- name: start the apache service
+  service:
+   name: apache2
+   state: started
+   enabled: yes
+- name: copy
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+  when: env == "staging"
+  notify: restart apache
+
+
+  # after copying we should notify
+  # deployment done so notify-restart
+  #go to handlrs and restart
