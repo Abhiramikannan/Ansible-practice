@@ -1,0 +1,17 @@
+---
+- name: creating directory and  creating a file and addings contents to it
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: creating a directory
+     file:
+      path: /root/ansible1
+      state: directory
+      mode: "0773"
+   - name: creating file
+     copy:
+      dest: /root/ansible1/f2.txt
+      content: "hello"
+
+  #copy -dont use file and path
