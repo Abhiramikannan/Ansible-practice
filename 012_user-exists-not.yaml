@@ -1,0 +1,20 @@
+---
+- name: checking the user exists or not
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: checkin the user exists/not
+     command: id abhi
+     register: user_check #which stores the output of command to user_check variable
+     ignore_errors: yes 
+   - name: show msg when user exists
+     debug:
+       msg: "user exists"
+     when: user_check.rc==0 #return count of command execution, 0 means success
+   - name: show msg when user not exists
+     debug:
+       msg: "user not exists" # in b u need to start
+     when: user_check.rc!=0 # same line of debug msg
+
+    
