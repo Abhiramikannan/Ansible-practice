@@ -1,0 +1,16 @@
+---
+- name: installing java on webservers
+  hosts: webserver
+  remote_user: root
+  become: yes
+  vars:
+   pack_name:
+     - openjdk-11-jdk
+     - openjdk-8-jdk
+  tasks:
+   - name: updating
+     apt:
+      update_cache: yes
+   - name: installing java
+     apt:
+      name: "{{pack_name}}"
