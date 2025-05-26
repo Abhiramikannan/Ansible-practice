@@ -1,0 +1,5 @@
+#1st add variables
+inventory_hostname: webserver
+env: staging
+
+#go to templates folder create a file and add contents
