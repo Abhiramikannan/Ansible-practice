@@ -1,0 +1,12 @@
+--- 
+- name: removing the user craeted
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: removing the user
+     user:
+      name: abhi # careful under user name
+      remove: yes
+      state: absent
+      force: yes
