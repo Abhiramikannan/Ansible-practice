@@ -1,0 +1,13 @@
+---
+- name: creating a file
+  hosts: webserver
+  remote_user: root
+  become: yes
+  tasks:
+   - name: creating a file 
+     file:
+      path: /root/abhi/f1.txt
+      state: touch
+
+
+#create a folder abhi inside /root in master and worker nodes
