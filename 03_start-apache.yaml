@@ -1,0 +1,23 @@
+---
+- name: starting apache
+  hosts: webserver
+  remote_user: root
+  become: yes
+  vars:
+   pack_name: apache2
+  tasks:
+   - name: updating 
+     apt:
+      update_cache: yes
+   - name: install apache
+     apt:
+      name: "{{pack_name}}"
+      state: present
+   - name: enabling
+     service:
+      name: "{{pack_name}}"
+      state: started
+      enabled: yes
+
+# sytemctl start apache2
+# service is used instead of systemctl 
