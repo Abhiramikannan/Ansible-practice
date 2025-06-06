@@ -1,0 +1,25 @@
+#slurp =read json data
+#set_fact
+
+---
+- name: converting json to yaml
+  hosts: webserver
+  remote_user: root
+  become: yes
+  gather_facts: false
+  connection: local
+  vars: 
+    json_input: "./data.json"
+    yaml_output: "./data.yaml"
+  tasks:
+  - name: read the json file
+    slurp:
+      src: "{{json_input}}"
+    register: json_raw
+  - name: decodes
+    set_fact:
+      json_data: "{{json_raw.content|b64decode| from_json}"
+  - name: write to yaml
+    copy:
+      dest: "{{yaml_output}}"
+      content: "{{json_data| to_nice_yaml}}"
