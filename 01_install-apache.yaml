@@ -14,3 +14,5 @@
 
 
 #ansible-playbook -i inventory 01_install-apache.yaml 
+
+#playbook and adhoc command
